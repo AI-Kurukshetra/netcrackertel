@@ -25,3 +25,4 @@ The local app defaults to demo mode, so dashboards render seeded telecom data wi
 - `infrastructure`: Docker, Kubernetes, and CI/CD assets
 - `doc`: Product, architecture, schema, decisions, and change tracking
 # netcrackertel
+# netcrackertel
