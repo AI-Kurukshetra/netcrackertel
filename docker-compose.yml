@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+    command: npm run dev --workspace=@telecosync/web
+    ports:
+      - "3000:3000"
+    environment:
+      DEMO_MODE: "true"
+      AI_SERVICE_URL: http://ai:8001
+    volumes:
+      - .:/app
+      - /app/node_modules
+    depends_on:
+      - ai
+
+  admin:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/web.Dockerfile
+    command: npm run dev --workspace=@telecosync/admin
+    ports:
+      - "3001:3001"
+    environment:
+      DEMO_MODE: "true"
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+  ai:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/ai.Dockerfile
+    command: uvicorn services.ai.main:app --host 0.0.0.0 --port 8001 --reload
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app

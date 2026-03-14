@@ -1,0 +1,25 @@
+{
+  "name": "telecosync",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace=@telecosync/web",
+    "dev:web": "npm run dev --workspace=@telecosync/web",
+    "dev:admin": "npm run dev --workspace=@telecosync/admin",
+    "dev:ai": "python3 -m uvicorn services.ai.main:app --reload --host 0.0.0.0 --port 8001",
+    "build": "npm run build --workspace=@telecosync/web && npm run build --workspace=@telecosync/admin",
+    "lint": "npm run lint --workspace=@telecosync/web && npm run lint --workspace=@telecosync/admin",
+    "typecheck": "npm run typecheck --workspace=@telecosync/web && npm run typecheck --workspace=@telecosync/admin",
+    "test": "npm run test --workspace=@telecosync/web",
+    "seed": "tsx scripts/seed.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.6.3"
+  }
+}

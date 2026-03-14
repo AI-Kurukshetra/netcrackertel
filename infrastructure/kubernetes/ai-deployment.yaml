@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telecosync-ai
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telecosync-ai
+  template:
+    metadata:
+      labels:
+        app: telecosync-ai
+    spec:
+      containers:
+        - name: ai
+          image: telecosync/ai:latest
+          ports:
+            - containerPort: 8001
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 8001
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telecosync-ai
+spec:
+  selector:
+    app: telecosync-ai
+  ports:
+    - port: 8001
+      targetPort: 8001

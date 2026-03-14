@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 244 247 251;
+  --bg-soft: 255 255 255;
+  --fg: 7 17 31;
+  --muted: 91 108 133;
+  --line: 226 232 240;
+}
+
+.dark {
+  --bg: 7 17 31;
+  --bg-soft: 15 23 42;
+  --fg: 241 245 249;
+  --muted: 148 163 184;
+  --line: 51 65 85;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(34, 211, 238, 0.12), transparent 24%),
+    radial-gradient(circle at top right, rgba(249, 115, 22, 0.08), transparent 22%),
+    rgb(var(--bg));
+  color: rgb(var(--fg));
+  font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
+}
+
+.grid-overlay {
+  background-image:
+    linear-gradient(rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.card-surface {
+  background: color-mix(in srgb, rgb(var(--bg-soft)) 88%, transparent);
+  border: 1px solid rgba(var(--line), 0.5);
+  box-shadow: 0 22px 54px rgba(15, 23, 42, 0.12);
+  backdrop-filter: blur(18px);
+}
+
+.text-muted {
+  color: rgb(var(--muted));
+}
+
+.field-control {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid rgba(var(--line), 0.8);
+  background: color-mix(in srgb, rgb(var(--bg-soft)) 96%, transparent);
+  color: rgb(var(--fg));
+  padding: 0.85rem 1rem;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.field-control::placeholder {
+  color: rgb(var(--muted));
+}
+
+.field-control:focus {
+  border-color: rgba(34, 211, 238, 0.65);
+  box-shadow: 0 0 0 4px rgba(34, 211, 238, 0.12);
+}
+
+.action-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(8, 145, 178, 0.72);
+  background: linear-gradient(135deg, #a5f3fc, #22d3ee 58%, #06b6d4);
+  color: #03131f;
+  font-weight: 700;
+  box-shadow: 0 20px 36px rgba(34, 211, 238, 0.28);
+  transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+}
+
+.action-primary:hover {
+  filter: brightness(1.03);
+  transform: translateY(-1px);
+  box-shadow: 0 20px 40px rgba(34, 211, 238, 0.28);
+}
+
+.action-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(var(--line), 0.92);
+  background: color-mix(in srgb, rgb(var(--bg-soft)) 97%, transparent);
+  color: rgb(var(--fg));
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  transition: transform 0.15s ease, border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.action-secondary:hover {
+  transform: translateY(-1px);
+  border-color: rgba(34, 211, 238, 0.4);
+  background: color-mix(in srgb, rgb(var(--bg-soft)) 100%, rgba(34, 211, 238, 0.08));
+}
+
+.action-primary:disabled,
+.action-secondary:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+  transform: none;
+  box-shadow: none;
+}
+
+select.field-control option {
+  background: rgb(var(--bg-soft));
+  color: rgb(var(--fg));
+}

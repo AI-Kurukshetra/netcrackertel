@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: telecosync-web
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: telecosync-web
+  template:
+    metadata:
+      labels:
+        app: telecosync-web
+    spec:
+      containers:
+        - name: web
+          image: telecosync/web:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DEMO_MODE
+              value: "false"
+            - name: AI_SERVICE_URL
+              value: "http://telecosync-ai:8001"
+          readinessProbe:
+            httpGet:
+              path: /api/dashboard
+              port: 3000
+          livenessProbe:
+            httpGet:
+              path: /api/dashboard
+              port: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: telecosync-web
+spec:
+  selector:
+    app: telecosync-web
+  ports:
+    - port: 80
+      targetPort: 3000

@@ -1,0 +1,3 @@
+# TelecoSync Blockers
+
+- None currently.
